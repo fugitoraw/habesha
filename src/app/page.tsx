@@ -1,15 +1,12 @@
 "use client"
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Users, BookOpen, MessageSquare, Calendar, ExternalLink, Menu } from "lucide-react";
-import { Facebook, Twitter, Instagram, Youtube } from "lucide-react";
+import { Users, BookOpen, MessageSquare, Calendar, Menu } from "lucide-react";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { useState } from "react";

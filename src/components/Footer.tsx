@@ -1,5 +1,4 @@
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
-import { Button } from './ui/button'
 import { SOCIAL_LINKS } from '@/constants'
 
 export default function Footer() {
