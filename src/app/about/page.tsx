@@ -1,3 +1,5 @@
+import { ArticleLayout } from "@/components/article/ArticleLayout";
+import SampleArticle from "@/components/article/SampleArticle";
 import React from "react";
 
 const articleSections = [
@@ -26,14 +28,8 @@ const articleSections = [
 
 export default function AboutUs() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16 space-y-10">
-      <h1 className="text-4xl font-bold text-center mb-10">About Us</h1>
-      {articleSections.map((section, index) => (
-        <section key={index} className="space-y-3">
-          <h2 className="text-2xl font-semibold text-gray-800">{section.heading}</h2>
-          <p className="text-lg text-gray-600 leading-relaxed">{section.text}</p>
-        </section>
-      ))}
-    </div>
+    <ArticleLayout title="About Us">
+      <SampleArticle/>
+    </ArticleLayout>
   );
 }
