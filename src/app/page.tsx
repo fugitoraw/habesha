@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { useState } from "react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { useIsMobile } from "@/hooks/use_mobile";
+import { useIsMobile } from "@/hooks/UseIsmobile";
 import Link from "next/link";
 import Footer from "@/components/Footer";
 import { SOCIAL_LINKS } from "@/constants";
