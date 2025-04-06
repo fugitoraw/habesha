@@ -16,7 +16,7 @@ import Link from "next/link";
 import Footer from "@/components/Footer";
 import { SOCIAL_LINKS } from "@/constants";
 
-const page = () => {
+const Page = () => {
   const isMobile = useIsMobile();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -36,8 +36,8 @@ const page = () => {
         <NavigationMenuContent>
           <div className="p-4 w-[200px]">
             <ul className="space-y-2">
-              <li><a href="/tools/code-sharing" className="block hover:text-[#8B0000]">Code Sharing</a></li>
-              <li><a href="/tools/project-collab" className="block hover:text-[#8B0000]">Project Collaboration</a></li>
+              <li><Link href="/tools/code-sharing" className="block hover:text-[#8B0000]">Code Sharing</Link></li>
+              <li><Link href="/tools/project-collab" className="block hover:text-[#8B0000]">Project Collaboration</Link></li>
             </ul>
           </div>
         </NavigationMenuContent>
@@ -69,21 +69,21 @@ const page = () => {
       </SheetTrigger>
       <SheetContent side="left" className="w-[300px] sm:w-[400px]">
         <nav className="flex flex-col gap-4">
-          {/* <a href="/blog" className="flex items-center gap-2 p-2 hover:bg-accent rounded-md">
+          {/* <Link href="/blog" className="flex items-center gap-2 p-2 hover:bg-accent rounded-md">
             <BookOpen className="w-4 h-4" />
             Blog
-          </a>
+          </Link>
           <div className="flex flex-col gap-2">
             <span className="flex items-center gap-2 p-2">
               <Users className="w-4 h-4" />
               Collaboration Tools
             </span>
-            <a href="/tools/code-sharing" className="pl-8 p-2 hover:bg-accent rounded-md">Code Sharing</a>
-            <a href="/tools/project-collab" className="pl-8 p-2 hover:bg-accent rounded-md">Project Collaboration</a>
+            <Link href="/tools/code-sharing" className="pl-8 p-2 hover:bg-accent rounded-md">Code Sharing</Link>
+            <Link href="/tools/project-collab" className="pl-8 p-2 hover:bg-accent rounded-md">Project Collaboration</Link>
           </div> */}
-          <a href="/about" className="p-2 hover:bg-accent rounded-md">About Us</a>
-          {/* <a href="/support" className="p-2 hover:bg-accent rounded-md">Support Us</a> */}
-          <a href="/guidelines" className="p-2 hover:bg-accent rounded-md">Community Guidelines</a>
+          <Link href="/about" className="p-2 hover:bg-accent rounded-md">About Us</Link>
+          {/* <Link href="/support" className="p-2 hover:bg-accent rounded-md">Support Us</Link> */}
+          <Link href="/guidelines" className="p-2 hover:bg-accent rounded-md">Community Guidelines</Link>
         </nav>
       </SheetContent>
     </Sheet>
@@ -94,7 +94,7 @@ const page = () => {
       {/* Navigation Bar */}
       <nav className="bg-white shadow-sm py-4 sticky top-0 z-50">
         <div className="container mx-auto px-4 flex justify-between items-center">
-          <a href="/" className="text-xl font-bold text-[#8B0000]">habesha progeny</a>
+          <Link href="/" className="text-xl font-bold text-[#8B0000]">habesha progeny</Link>
           {isMobile ? (
             <MobileNav />
           ) : (
@@ -250,4 +250,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
