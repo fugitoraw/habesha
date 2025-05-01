@@ -6,6 +6,7 @@ import { SOCIAL_LINKS } from "@/constants";
 import Header from "@/components/page/Header";
 import Hero from "@/components/page/Hero";
 import Features from "@/components/page/Features";
+import RecentBlog from "@/components/RecentBlog";
 
 const Page = () => {
   return (
@@ -13,9 +14,8 @@ const Page = () => {
       <Header/>
       <Hero />
       <Features />
-      {/* <RecentBlog/> */}
       {/* Actionable Impact Section */}
-      <section className="py-20 bg-gradient-to-r from-[#8B0000] to-[#DAA520] text-white">
+      <section className="py-20 bg-gradient-to-r from-[#57ff8f] to-[#16364d] text-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl font-bold mb-6">Make an Impact</h2>
@@ -26,14 +26,14 @@ const Page = () => {
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
                 <h3 className="text-xl font-semibold mb-4">Mentor Others</h3>
                 <p className="mb-4">Share your knowledge and experience with aspiring developers.</p>
-                <Button className="bg-white text-[#8B0000] hover:bg-gray-100 cursor-pointer">
+                <Button className="bg-white text-[#16364d] hover:bg-gray-100 cursor-pointer">
                   Become a Mentor
                 </Button>
               </div>
               <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6">
                 <h3 className="text-xl font-semibold mb-4">Contribute to Projects</h3>
                 <p className="mb-4">Work on meaningful projects that benefit our community.</p>
-                <Button className="bg-white text-[#8B0000] hover:bg-gray-100 cursor-pointer">
+                <Button className="bg-white text-[#16364d] hover:bg-gray-100 cursor-pointer">
                   <Link href={SOCIAL_LINKS.email}></Link>
                     Help Out
                   </Button>
@@ -43,8 +43,9 @@ const Page = () => {
         </div>
       </section>
 
+      <RecentBlog/>
       {/* Community Stats Section */}
-      <section className="py-20 bg-gradient-to-r from-[#228B22] to-[#DAA520] text-white">
+      <section className="py-20 bg-gradient-to-r from-[#57ff8f] to-[#16364d] text-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
             <div>
@@ -70,7 +71,7 @@ const Page = () => {
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
             Connect with fellow developers, share your knowledge, and be part of something amazing.
           </p>
-          <Button className="bg-[#8B0000] text-white cursor-pointer hover:bg-[#6B0000] text-lg px-8 py-6">
+          <Button className="bg-[#16364d] text-white cursor-pointer hover:bg-[#57ff8f] text-lg px-8 py-6">
             <Link href={SOCIAL_LINKS.telegram}>
               Get Started Today
             </Link>

@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { ChevronRight } from 'lucide-react';
+import { useIsMobile } from '@/hooks/UseIsmobile';
 
 interface TableOfContentsProps {
   headings: {
@@ -15,14 +16,17 @@ interface TableOfContentsProps {
 
 export const TableOfContents = ({ headings, onHeadingClick }: TableOfContentsProps) => {
   const [activeId, setActiveId] = useState<string>('');
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    if (headings.length === 0) return;
+
     const handleScroll = () => {
       const headingElements = headings.map(({ id }) => document.getElementById(id));
       const visibleHeadings = headingElements.filter((el) => {
         if (!el) return false;
         const rect = el.getBoundingClientRect();
-        return rect.top < 150 && rect.bottom > 0;
+        return rect.top < (isMobile ? 100 : 150) && rect.bottom > 0;
       });
       
       if (visibleHeadings.length > 0) {
@@ -30,20 +34,23 @@ export const TableOfContents = ({ headings, onHeadingClick }: TableOfContentsPro
       }
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
-    
+    const scrollTimeout = setTimeout(() => {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      handleScroll();
+    }, 100);
+
     return () => {
+      clearTimeout(scrollTimeout);
       window.removeEventListener('scroll', handleScroll);
     };
-  }, [headings]);
+  }, [headings, isMobile]);
 
   const handleClick = (id: string) => {
     const element = document.getElementById(id);
     if (!element) return;
 
-    // Calculate scroll position accounting for fixed header
-    const headerHeight = 80; // Adjust based on your actual header height
+    // Different offsets for mobile/desktop
+    const headerHeight = isMobile ? 60 : 80;
     const elementPosition = element.getBoundingClientRect().top + window.scrollY;
     const offsetPosition = elementPosition - headerHeight;
 
@@ -52,35 +59,39 @@ export const TableOfContents = ({ headings, onHeadingClick }: TableOfContentsPro
       behavior: 'smooth'
     });
 
-    // Close mobile sidebar after scroll completes
-    setTimeout(() => {
-      if (window.innerWidth < 768 && onHeadingClick) {
-        onHeadingClick(id);
-      }
-    }, 800);
+    // Close sidebar after scroll on mobile
+    if (isMobile && onHeadingClick) {
+      setTimeout(() => onHeadingClick(id), 500);
+    }
   };
 
   return (
     <div className="space-y-1">
-      <p className="font-medium mb-2">On This Page</p>
+      <p className="font-medium mb-2 text-sm md:text-base">On This Page</p>
       <nav className="space-y-1">
         {headings.map((heading) => (
           <button
             key={heading.id}
             onClick={() => handleClick(heading.id)}
             className={cn(
-              "flex items-center text-sm py-1 px-2 w-full text-left rounded-md transition-colors",
+              "flex items-center text-sm py-1.5 px-2 w-full text-left rounded-md transition-colors",
               heading.level === 1 ? "" : "pl-4",
               heading.level === 3 ? "pl-6" : "",
+              heading.level === 4 ? "pl-8" : "",
               activeId === heading.id
                 ? "font-medium text-primary bg-primary/5"
-                : "text-muted-foreground hover:text-foreground hover:bg-accent"
+                : "text-muted-foreground hover:text-foreground hover:bg-accent",
+              isMobile ? "text-sm" : "text-sm md:text-[0.925rem]"
             )}
+            aria-current={activeId === heading.id ? "location" : undefined}
           >
             {activeId === heading.id && (
-              <ChevronRight className="mr-1 h-3 w-3" />
+              <ChevronRight className="mr-1 h-3 w-3 flex-shrink-0" />
             )}
-            <span className={activeId === heading.id ? "" : "ml-4"}>
+            <span className={cn(
+              "truncate",
+              activeId === heading.id ? "" : "ml-4"
+            )}>
               {heading.text}
             </span>
           </button>

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { TableOfContents } from './TableofContents';
+import { useIsMobile } from '@/hooks/UseIsmobile';
 
 interface Heading {
   id: string;
@@ -18,6 +19,7 @@ interface ArticleLayoutProps {
 export const ArticleLayout = ({ title, children }: ArticleLayoutProps) => {
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const extractHeadings = (): Heading[] => {
@@ -44,7 +46,6 @@ export const ArticleLayout = ({ title, children }: ArticleLayoutProps) => {
     // Initial extraction
     setHeadings(extractHeadings());
 
-    // Set up mutation observer for dynamic content
     const observer = new MutationObserver(() => {
       setHeadings(extractHeadings());
     });
@@ -60,57 +61,68 @@ export const ArticleLayout = ({ title, children }: ArticleLayoutProps) => {
     return () => observer.disconnect();
   }, [children]);
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen((prev) => !prev);
-  };
+  // Auto-close sidebar when switching to desktop
+  useEffect(() => {
+    if (isMobile === false && isSidebarOpen) {
+      setIsSidebarOpen(false);
+    }
+  }, [isMobile, isSidebarOpen]);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
-      {/* Mobile Header */}
-      <div className="md:hidden py-3 px-4 flex items-center border-b sticky top-0 z-30 bg-background">
-        <button
-          onClick={toggleSidebar}
-          className="p-2 rounded-md hover:bg-secondary"
-          aria-label={isSidebarOpen ? 'Close sidebar' : 'Open sidebar'}
-        >
-          {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-        <h1 className="text-lg font-semibold ml-3 truncate">{title}</h1>
-      </div>
+    <div className="min-h-screen flex flex-col md:flex-row relative">
+      {/* Mobile Header - Only shows on mobile */}
+      {isMobile && (
+        <div className="py-3 px-4 flex items-center border-b sticky top-0 z-30 bg-background">
+          <button
+            onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+            className="p-2 rounded-md hover:bg-secondary transition-colors"
+            aria-label={isSidebarOpen ? 'Close sidebar' : 'Open sidebar'}
+          >
+            {isSidebarOpen ? <X size={20} /> : <Menu size={20} />}
+          </button>
+          <h1 className="text-lg font-semibold ml-3 truncate">{title}</h1>
+        </div>
+      )}
 
-      {/* Sidebar */}
-      <div
-        className={`${
-          isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } md:translate-x-0 transition-transform duration-200 ease-in-out fixed md:sticky top-0 left-0 z-40 md:z-0 h-screen w-64 md:w-72 bg-background border-r shadow-lg md:shadow-none`}
+      {/* Sidebar - Responsive behavior */}
+      <aside
+        className={`
+          ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+          md:translate-x-0 transition-transform duration-200 ease-in-out
+          fixed md:sticky top-0 left-0 z-40 md:z-0 h-screen w-3/4 md:w-72
+          bg-background border-r shadow-lg md:shadow-none
+          ${isMobile === undefined ? 'invisible' : ''} // Prevent flash on initial load
+        `}
       >
         <div className="h-full overflow-auto p-6 pt-8">
-          <div className="hidden md:block mb-8">
-            <h2 className="text-xl font-bold">{title}</h2>
-          </div>
+          {!isMobile && (
+            <div className="mb-8">
+              <h2 className="text-xl font-bold">{title}</h2>
+            </div>
+          )}
 
           {headings.length > 0 && (
             <TableOfContents
               headings={headings}
-              onHeadingClick={() => setIsSidebarOpen(false)}
+              onHeadingClick={() => isMobile && setIsSidebarOpen(false)}
             />
           )}
         </div>
-      </div>
+      </aside>
 
-      {/* Backdrop for mobile */}
-      {isSidebarOpen && (
+      {/* Backdrop - Only for mobile when sidebar is open */}
+      {isMobile && isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/20 z-30 md:hidden"
+          className="fixed inset-0 bg-black/20 z-30 backdrop-blur-sm"
           onClick={() => setIsSidebarOpen(false)}
         />
       )}
 
       {/* Main Content */}
-      <main className="flex-grow px-4 sm:px-6 lg:px-8 mx-auto max-w-3xl py-12">
+      <main className="flex-grow px-4 sm:px-6 lg:px-8 mx-auto max-w-3xl py-12 md:py-16 transition-all duration-200">
         <article
           id="article-content"
-          className="prose prose-slate max-w-none scroll-mt-20"
+          className="prose prose-slate max-w-none scroll-mt-16 md:scroll-mt-20"
         >
           {children}
         </article>

@@ -9,7 +9,7 @@ export default function Features() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="pt-6">
-                <div className="text-[#8B0000] mb-4 flex justify-center">
+                <div className="text-[#16364d] mb-4 flex justify-center">
                   <BookOpen size={32} />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-center">Interactive Blogs</h3>
@@ -21,7 +21,7 @@ export default function Features() {
 
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="pt-6">
-                <div className="text-[#8B0000] mb-4 flex justify-center">
+                <div className="text-[#16364d] mb-4 flex justify-center">
                   <Users size={32} />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-center">Collaborative Tools</h3>
@@ -33,7 +33,7 @@ export default function Features() {
 
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="pt-6">
-                <div className="text-[#8B0000] mb-4 flex justify-center">
+                <div className="text-[#16364d] mb-4 flex justify-center">
                   <MessageSquare size={32} />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-center">Engagement via Telegram</h3>
@@ -45,7 +45,7 @@ export default function Features() {
 
             <Card className="border-none shadow-lg hover:shadow-xl transition-shadow">
               <CardContent className="pt-6">
-                <div className="text-[#8B0000] mb-4 flex justify-center">
+                <div className="text-[#16364d] mb-4 flex justify-center">
                   <Calendar size={32} />
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-center">Events & Announcements</h3>

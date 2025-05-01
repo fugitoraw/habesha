@@ -1,9 +1,10 @@
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
 import { SOCIAL_LINKS } from '@/constants'
+import Link from 'next/link'
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1A1F2C] text-white py-12">
+    <footer className="bg-[#1b1b33] text-white py-12">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
             <div>
@@ -16,20 +17,20 @@ export default function Footer() {
             <div>
               <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-300 hover:text-[#DAA520] transition-colors">About Us</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-[#DAA520] transition-colors">Blog</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-[#DAA520] transition-colors">Events</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-[#DAA520] transition-colors">Contact</a></li>
+                <li><Link href="#" className="text-gray-300 hover:text-[#57ff8f] transition-colors">About Us</Link></li>
+                <li><Link href="#" className="text-gray-300 hover:text-[#57ff8f] transition-colors">Blog</Link></li>
+                <li><Link href="#" className="text-gray-300 hover:text-[#57ff8f] transition-colors">Events</Link></li>
+                <li><Link href="#" className="text-gray-300 hover:text-[#57ff8f] transition-colors">Contact</Link></li>
               </ul>
             </div>
 
             <div>
               <h4 className="text-lg font-semibold mb-4">Community</h4>
               <ul className="space-y-2">
-                <li><a href="#" className="text-gray-300 hover:text-[#DAA520] transition-colors">Join Telegram</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-[#DAA520] transition-colors">Code of Conduct</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-[#DAA520] transition-colors">Contributors</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-[#DAA520] transition-colors">Resources</a></li>
+                <li><Link href={SOCIAL_LINKS.telegram} className="text-gray-300 hover:text-[#57ff8f] transition-colors">Join Telegram</Link></li>
+                <li><Link href="/guidelines" className="text-gray-300 hover:text-[#57ff8f] transition-colors">Code of Conduct</Link></li>
+                {/* <li><Link href="#" className="text-gray-300 hover:text-[#57ff8f] transition-colors">Contributors</Link></li> */}
+                {/* <li><Link href="#" className="text-gray-300 hover:text-[#57ff8f] transition-colors">Resources</Link></li> */}
               </ul>
             </div>
 
@@ -40,9 +41,9 @@ export default function Footer() {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="px-4 py-2 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-[#DAA520]"
+                  className="px-4 py-2 rounded bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-[#57ff8f]"
                 />
-                <Button className="bg-[#DAA520] hover:bg-[#B8860B]">
+                <Button className="bg-[#57ff8f] hover:bg-[#B8860B]">
                   Subscribe
                 </Button>
               </div>
@@ -55,18 +56,18 @@ export default function Footer() {
                 © 2024 habesha progeny. All rights reserved.
               </p>
               <div className="flex space-x-6">
-                <a href={SOCIAL_LINKS.facebook} className="text-gray-400 hover:text-[#DAA520] transition-colors">
+                <Link href={SOCIAL_LINKS.facebook} className="text-gray-400 hover:text-[#57ff8f] transition-colors">
                   <Facebook size={20} />
-                </a>
-                <a href={SOCIAL_LINKS.twitter} className="text-gray-400 hover:text-[#DAA520] transition-colors">
+                </Link>
+                <Link href={SOCIAL_LINKS.twitter} className="text-gray-400 hover:text-[#57ff8f] transition-colors">
                   <Twitter size={20} />
-                </a>
-                <a href={SOCIAL_LINKS.instagram} className="text-gray-400 hover:text-[#DAA520] transition-colors">
+                </Link>
+                <Link href={SOCIAL_LINKS.instagram} className="text-gray-400 hover:text-[#57ff8f] transition-colors">
                   <Instagram size={20} />
-                </a>
-                <a href={SOCIAL_LINKS.youtube} className="text-gray-400 hover:text-[#DAA520] transition-colors">
+                </Link>
+                {/* <Link href={SOCIAL_LINKS.youtube} className="text-gray-400 hover:text-[#57ff8f] transition-colors">
                   <Youtube size={20} />
-                </a>
+                </Link> */}
               </div>
             </div>
           </div>
